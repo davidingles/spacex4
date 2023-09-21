@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getLaunchesById } from 'C:/DEV/spacex4/src/utils/utilsSpace.ts'
+const {id} = Astro.params;
+
+
+export const prerender = false;
+
+const data = await getLaunchesById(id);
+
+---
+
+
+<Layout title='lanzamiento'>
+    <div class="border-8">
+        {
+            <div class="w-56 ">
+                <p>{ data.details}</p>
+                <p>{data.name}</p>
+                <p>{data.success ? 'exito' : 'fracaso'}</p>
+                <img src={data.links.patch.small} alt="">
+            </div>
+        }
+    </div>
+</Layout>

@@ -1,0 +1,23 @@
+---
+import { type SpacexTypes } from "../types/SpacesTypes";
+import { getLaunches } from "../utils/utilsSpace";
+
+const data = await getLaunches();
+
+---
+
+
+launches
+<div class="grid grid-cols-4 gap-4 py-12">
+    {
+        data.docs.map(launch => {
+            return (
+                <a href={`/${launch.id}`} class="border-red-500 border-2 rounded-xl">
+                    <h2>{launch.name}</h2>
+                    <p>{launch.details}</p>
+                    <img src={launch.links.patch.small} alt="">
+                </a>
+            )
+        })
+    }
+</div>
