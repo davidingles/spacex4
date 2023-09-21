@@ -7,7 +7,7 @@ const {id} = Astro.params;
 export const prerender = false;
 
 const data = await getLaunchesById(id);
-
+const estadoLanzamiento = data.success ? 'exito' : 'fracaso';
 ---
 
 
@@ -17,7 +17,15 @@ const data = await getLaunchesById(id);
             <div class="w-56 ">
                 <p>{ data.details}</p>
                 <p>{data.name}</p>
-                <p>{data.success ? 'exito' : 'fracaso'}</p>
+                <p
+                    class:list={[
+                        "border-2 border-orange-500",
+                        {
+                            "bg-green-500": data.success,
+                            "bg-gray-500": !data.success
+                        }
+                    ]}
+                >{data.success ? 'exito' : 'fracaso'}</p>
                 <img src={data.links.patch.small} alt="">
             </div>
         }
